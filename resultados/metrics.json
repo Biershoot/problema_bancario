@@ -47,7 +47,8 @@
       "rho_pago": 0.3957200000000001,
       "Wq_pago": 3.4052823194545594,
       "W_pago": 8.60528231945456,
-      "Wq_ponderado": 9.076580648211696
+      "Wq_ponderado": 9.076580648211696,
+      "Wq_peor_cola": 11.507137074821898
     },
     {
       "Retiros(cajas)": 2,
@@ -58,12 +59,15 @@
       "rho_pago": 0.7914400000000003,
       "Wq_pago": 19.73287303413889,
       "W_pago": 24.93287303413889,
-      "Wq_ponderado": 7.084285887220045
+      "Wq_ponderado": 7.084285887220045,
+      "Wq_peor_cola": 19.73287303413889
     }
   ],
   "mejor_reparto": {
-    "retiros": 2,
-    "pagos": 1,
-    "Wq_pond": 7.084285887220045
+    "retiros": 1,
+    "pagos": 2,
+    "criterio": "minimiza la peor cola",
+    "Wq_peor_cola": 11.507137074821898,
+    "Wq_pond": 9.076580648211696
   }
 }

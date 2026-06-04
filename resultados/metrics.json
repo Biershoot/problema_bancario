@@ -1,0 +1,69 @@
+{
+  "media_entre_llegadas": 1.9710906701708275,
+  "lam_total": 0.5073333333333334,
+  "ES": 3.1979999999999995,
+  "mu": 0.3126954346466542,
+  "caja_menor_atencion": 1,
+  "t_menor": 6.071351956880173,
+  "caja_mayor_atencion": 2,
+  "t_mayor": 9.259188876877422,
+  "prom_tipo_total": {
+    "Rapido": 48.6,
+    "Normal": 86.2,
+    "Lento": 52.1,
+    "Muy lento": 60.0
+  },
+  "prom_total_dia": 246.9,
+  "replica_menos_usuarios": 4,
+  "min_usuarios_replica": 232,
+  "caja_menos_usuarios": 3,
+  "min_clientes_caja": 80.0,
+  "actual": {
+    "lam_caja": 0.16911111111111113,
+    "rho": 0.5408173333333333,
+    "Wq": 3.766548603751011,
+    "W": 6.96454860375101,
+    "Lq": 0.6369652194343377
+  },
+  "cuatro_cajas": {
+    "rho": 0.405613,
+    "Wq": 2.18233301535868,
+    "W": 5.38033301535868
+  },
+  "Wq_sim": 4.68255993422144,
+  "lam_ret": 0.35513333333333336,
+  "ES_ret": 2.3400000000000003,
+  "mu_ret": 0.4273504273504273,
+  "lam_pag": 0.15220000000000003,
+  "ES_pag": 5.2,
+  "mu_pag": 0.1923076923076923,
+  "escenarios": [
+    {
+      "Retiros(cajas)": 1,
+      "Pagos(cajas)": 2,
+      "rho_retiro": 0.8310120000000002,
+      "Wq_retiro": 11.507137074821898,
+      "W_retiro": 13.847137074821898,
+      "rho_pago": 0.3957200000000001,
+      "Wq_pago": 3.4052823194545594,
+      "W_pago": 8.60528231945456,
+      "Wq_ponderado": 9.076580648211696
+    },
+    {
+      "Retiros(cajas)": 2,
+      "Pagos(cajas)": 1,
+      "rho_retiro": 0.4155060000000001,
+      "Wq_retiro": 1.6634628242548266,
+      "W_retiro": 4.003462824254827,
+      "rho_pago": 0.7914400000000003,
+      "Wq_pago": 19.73287303413889,
+      "W_pago": 24.93287303413889,
+      "Wq_ponderado": 7.084285887220045
+    }
+  ],
+  "mejor_reparto": {
+    "retiros": 2,
+    "pagos": 1,
+    "Wq_pond": 7.084285887220045
+  }
+}

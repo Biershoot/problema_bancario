@@ -156,20 +156,28 @@ for nret, npag in opciones:
     rho_p, _, Lq_p, Wq_p, W_p = grupo_mm1(lam_pag, mu_pag, npag)
     # espera media ponderada por flujo
     Wq_pond = (lam_ret*Wq_r + lam_pag*Wq_p)/(lam_ret+lam_pag)
+    # peor espera entre las dos colas: criterio de equidad/nivel de servicio,
+    # evita que un tipo de cliente quede con una cola saturada
+    Wq_peor = max(Wq_r, Wq_p)
     res.append({
         "Retiros(cajas)": nret, "Pagos(cajas)": npag,
         "rho_retiro": rho_r, "Wq_retiro": Wq_r, "W_retiro": W_r,
         "rho_pago": rho_p, "Wq_pago": Wq_p, "W_pago": W_p,
-        "Wq_ponderado": Wq_pond,
+        "Wq_ponderado": Wq_pond, "Wq_peor_cola": Wq_peor,
     })
 res_df = pd.DataFrame(res)
 print(res_df.round(3).to_string(index=False))
 
-mejor = res_df.loc[res_df["Wq_ponderado"].idxmin()]
-print(f"\nMejor reparto por espera ponderada: "
+# Se elige minimizando la PEOR cola: el promedio ponderado favorece a los
+# retiros (alto volumen) y esconde una cola de pagos de ~20 min, que es
+# inaceptable. Equilibrar la peor espera da 1 caja retiros + 2 de pagos,
+# coherente con que los pagos tienen un servicio más largo (E[S]=5.2 min).
+mejor = res_df.loc[res_df["Wq_peor_cola"].idxmin()]
+print(f"\nMejor reparto (minimiza la peor cola): "
       f"{int(mejor['Retiros(cajas)'])} caja(s) retiros + "
       f"{int(mejor['Pagos(cajas)'])} caja(s) pagos "
-      f"(Wq ponderado = {mejor['Wq_ponderado']:.3f} min)")
+      f"(peor espera = {mejor['Wq_peor_cola']:.3f} min; "
+      f"Wq ponderado = {mejor['Wq_ponderado']:.3f} min)")
 
 # Guardar resultados clave
 detalle.to_csv("detalle_replicas.csv", index=False)
@@ -197,6 +205,8 @@ metrics = {
     "escenarios": res_df.to_dict(orient="records"),
     "mejor_reparto": {"retiros": int(mejor['Retiros(cajas)']),
                       "pagos": int(mejor['Pagos(cajas)']),
+                      "criterio": "minimiza la peor cola",
+                      "Wq_peor_cola": float(mejor['Wq_peor_cola']),
                       "Wq_pond": float(mejor['Wq_ponderado'])},
 }
 with open("metrics.json", "w") as f:
